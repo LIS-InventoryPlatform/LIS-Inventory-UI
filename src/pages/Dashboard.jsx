@@ -1,4 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react'
+import SessionInfo from '../components/SessionInfo'
+import { clearInternalToken } from '../utils/tokenStore'
 
 const lisLogo = '/lis-logo.png'
 
@@ -6,6 +8,7 @@ export default function Dashboard() {
   const { user, logout } = useAuth0()
 
   const handleLogout = () => {
+    clearInternalToken()
     logout({ logoutParams: { returnTo: window.location.origin } })
   }
 
@@ -36,6 +39,8 @@ export default function Dashboard() {
           <strong>LIS Inventory</strong>. Pronto encontrarás aquí
           las herramientas para gestionar tu inventario.
         </div>
+
+        <SessionInfo className="mt-3 mb-3 text-start" />
 
         <img src={lisLogo} alt="LIS" className="dashboard-logo" />
 
